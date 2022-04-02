@@ -2,6 +2,7 @@ import "./App.css";
 import { Navbar } from "./Components/Navbar/navbar";
 import { HomePage } from "./Routes/homePage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { TodoList } from "./Components/Todos/todos";
 function App() {
   return (
     <div className="App">
@@ -9,9 +10,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
       </Routes>
-      {/* <Routes>
+      <Routes>
         <Route path="/todos" element={<TodoList />} />
-      </Routes> */}
+      </Routes>
     </div>
   );
 }
