@@ -9,7 +9,7 @@
     margin: 5rem auto;
     align-items: stretch;
     gap: 1.5rem;
-    max-width: 45vw;
+    max-width: 35vw;
 }
 
 .wrap-side-content {
@@ -24,7 +24,7 @@
     border-radius: 1rem;
 }
 .res-img-main{
-    max-width: 50rem;
+    min-width: 50rem;
     object-fit: contain;
 }
 .h3-tags{

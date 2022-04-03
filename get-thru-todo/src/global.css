@@ -7,6 +7,7 @@ body{
 
 :root{
     --primary-title-color:  #fe3b34;
+    --red-color: red;
 }
 
 h1, h2{
@@ -28,3 +29,7 @@ h1, h2{
   .underline{
       border-bottom: 3px solid var(--grid-odd-color);
   }
+  .red-color{
+    color: var(--red-color);
+  }
+ 
