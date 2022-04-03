@@ -16,6 +16,7 @@ const TaskCard = ({ task, index }) => {
             <button class="btn-primary-card red-color"><i class="fa-solid fa-trash"></i></button>
           </footer>
         </div>
+        
       </div>
     </>
   );
