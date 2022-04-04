@@ -1,9 +1,11 @@
 import "../Cards/taskCard.css";
 import { colors } from "./cardColor";
 import { useTask } from "../../Context/taskContext";
-const TaskCard = ({ items, setTaskDetails, setShowModal }) => {
-  const {taskId}= items
-  const { task, setTask } = useTask();
+const TaskCard = ({ items, setTaskDetails, setShowModal, showModal }) => {
+  const editAction=()=>{
+    setTaskDetails(items);
+    setShowModal(true);
+  }
   return (
     <>
       <div class="all-card-collection">
@@ -30,6 +32,7 @@ const TaskCard = ({ items, setTaskDetails, setShowModal }) => {
             <button
               class="btn-primary-card green-text"
               style={{ color: colors[(Math.floor(Math.random() * (100 - 1 + 1)) + 1) % 5 % 5].primaryColor }}
+             onClick={()=> editAction(items, setTaskDetails, setShowModal)}
             >
               <i class="fa-solid fa-pen-to-square"></i>
             </button>

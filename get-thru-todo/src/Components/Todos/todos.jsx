@@ -21,7 +21,7 @@ const TodoList = () => {
         </div>
       </div>
       <div className="taskCard">
-        {task.map((items)=>(<TaskCard items={items} setTaskDetails={setTaskDetails} setShowModal={setShowModal} />))}
+        {task.map((items)=>(<TaskCard items={items} setTaskDetails={setTaskDetails} setShowModal={setShowModal} showModal={showModal}/>))}
       </div>
     </>
   );

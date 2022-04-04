@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTask } from "../../Context/taskContext";
 import { addTodo } from "../helperFunctions/addTodo";
+import { EditTodo } from "../helperFunctions/editTodo";
 import "../Modals/createTask.css";
 const CreateTask = ({
   taskDetails,
@@ -21,7 +22,6 @@ const CreateTask = ({
   };
   const { task, setTask } = useTask();
   const [appendTask, setAppendTask] = useState(taskDetails || initialDetails);
-  console.log("taskDetails", appendTask);
   return (
     <>
       <form className="form-submit" onSubmit={(e)=> e.preventDefault()}>
@@ -75,7 +75,11 @@ const CreateTask = ({
         </lable>
 
         <div className="btnDiv">
-          <button onClick={()=> addTodo(appendTask,task,setTask,resetInputField)}> Save </button>
+         { !taskDetails ? <button onClick={()=> addTodo(appendTask,task,setTask,resetInputField)}> Add </button> : <button onClick={()=> EditTodo({taskId: taskDetails.taskId,
+                  appendTask,
+                  setTask,
+                  task,
+                  resetInputField})}>  Update </button>}
         </div>
       </form>
     </>
