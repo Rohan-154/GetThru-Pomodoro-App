@@ -9,11 +9,11 @@ const CreateTask = ({
   setShowModal,
   showModal,
 }) => {
-  const resetInputField = ()=>{
+  const resetInputField = () => {
     setShowModal(false);
     setAppendTask(initialDetails);
     setTaskDetails();
-  }
+  };
   const initialDetails = {
     title: "",
     description: "",
@@ -24,7 +24,7 @@ const CreateTask = ({
   const [appendTask, setAppendTask] = useState(taskDetails || initialDetails);
   return (
     <>
-      <form className="form-submit" onSubmit={(e)=> e.preventDefault()}>
+      <form className="form-submit" onSubmit={(e) => e.preventDefault()}>
         <lable htmlFor="task">
           {" "}
           Task Name
@@ -36,8 +36,8 @@ const CreateTask = ({
             autoComplete="hidden"
             name="taskName"
             value={appendTask.title}
-            onChange={(e)=>{
-              setAppendTask({...appendTask, title:e.target.value})
+            onChange={(e) => {
+              setAppendTask({ ...appendTask, title: e.target.value });
             }}
             required
           />
@@ -49,8 +49,8 @@ const CreateTask = ({
             rows="5"
             className="textarea-des"
             value={appendTask.description}
-            onChange={(e)=>{
-              setAppendTask({...appendTask, description:e.target.value})
+            onChange={(e) => {
+              setAppendTask({ ...appendTask, description: e.target.value });
             }}
             name="description"
             required
@@ -58,7 +58,7 @@ const CreateTask = ({
         </label>
         <lable htmlFor="task">
           {" "}
-         Timer
+          Timer
           <input
             className="input-task"
             id="timer"
@@ -67,19 +67,39 @@ const CreateTask = ({
             autoComplete="hidden"
             name="timer"
             value={appendTask.time}
-            onChange={(e)=>{
-              setAppendTask({...appendTask, time:e.target.value})
+            onChange={(e) => {
+              setAppendTask({ ...appendTask, time: e.target.value });
             }}
             required
           />
         </lable>
 
         <div className="btnDiv">
-         { !taskDetails ? <button onClick={()=> addTodo(appendTask,task,setTask,resetInputField)}> Add </button> : <button onClick={()=> EditTodo({taskId: taskDetails.taskId,
+          {!taskDetails ? (
+            <button
+              onClick={() =>
+                addTodo(appendTask, task, setTask, resetInputField)
+              }
+            >
+              {" "}
+              Add{" "}
+            </button>
+          ) : (
+            <button
+              onClick={() =>
+                EditTodo({
+                  taskId: taskDetails.taskId,
                   appendTask,
                   setTask,
                   task,
-                  resetInputField})}>  Update </button>}
+                  resetInputField,
+                })
+              }
+            >
+              {" "}
+              Update{" "}
+            </button>
+          )}
         </div>
       </form>
     </>
