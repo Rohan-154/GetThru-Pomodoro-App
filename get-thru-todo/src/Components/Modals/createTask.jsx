@@ -1,22 +1,29 @@
 import { useState } from "react";
-const CreateTask = ({ modal, setModal, save }) => {
-  const [taskName, setTaskName] = useState("");
-  const [description, setDescription] = useState("");
-  const handleAppend = (e) => {
-    e.preventDefault();
-    const taskObj = {};
-    taskObj["Name"] = taskName;
-    taskObj["Description"] = description;
-    save(taskObj);
+import { useTask } from "../../Context/taskContext";
+import { addTodo } from "../helperFunctions/addTodo";
+import "../Modals/createTask.css";
+const CreateTask = ({
+  taskDetails,
+  setTaskDetails,
+  setShowModal,
+  showModal,
+}) => {
+  const resetInputField = ()=>{
+    setShowModal(false);
+    setAppendTask(initialDetails);
+    setTaskDetails();
+  }
+  const initialDetails = {
+    title: "",
+    description: "",
+    time: 25,
+    isDone: false,
   };
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-
-    name === "taskName" ? setTaskName(value) : setDescription(value);
-  };
+  const { task, setTask } = useTask();
+  const [appendTask, setAppendTask] = useState(taskDetails || initialDetails);
   return (
     <>
-      <form className="form-submit">
+      <form className="form-submit" onSubmit={(e)=> e.preventDefault()}>
         <lable htmlFor="task">
           {" "}
           Task Name
@@ -27,8 +34,10 @@ const CreateTask = ({ modal, setModal, save }) => {
             placeholder="Enter task name"
             autoComplete="hidden"
             name="taskName"
-            value={taskName}
-            onChange={handleInput}
+            value={appendTask.title}
+            onChange={(e)=>{
+              setAppendTask({...appendTask, title:e.target.value})
+            }}
             required
           />
         </lable>
@@ -38,15 +47,33 @@ const CreateTask = ({ modal, setModal, save }) => {
           <textarea
             rows="5"
             className="textarea-des"
-            value={description}
-            onChange={handleInput}
+            value={appendTask.description}
+            onChange={(e)=>{
+              setAppendTask({...appendTask, description:e.target.value})
+            }}
             name="description"
           ></textarea>{" "}
         </label>
+        <lable htmlFor="task">
+          {" "}
+         Timer
+          <input
+            className="input-task"
+            id="timer"
+            type="number"
+            placeholder="Enter Time In Minutes"
+            autoComplete="hidden"
+            name="timer"
+            value={appendTask.time}
+            onChange={(e)=>{
+              setAppendTask({...appendTask, time:e.target.value})
+            }}
+            required
+          />
+        </lable>
 
         <div className="btnDiv">
-          <button onClick={(e) => handleAppend(e)}> Save </button>
-          <button onClick={(modal) => setModal(false)}> Discard </button>
+          <button onClick={()=> addTodo(appendTask,task,setTask,resetInputField)}> Save </button>
         </div>
       </form>
     </>
