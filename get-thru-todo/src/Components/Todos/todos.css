@@ -25,7 +25,7 @@
   }
   .btnDiv {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 1rem 0rem;
   }
   button {

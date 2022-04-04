@@ -1,55 +1,27 @@
 import { useEffect, useState } from "react";
+import { useTask } from "../../Context/taskContext";
 import TaskCard from "../Cards/taskCard";
 import { CreateTask } from "../Modals/createTask";
 import "../Todos/todos.css";
 const TodoList = () => {
-  const [modal, setModal] = useState(false);
-  const [taskList, setTaskList] = useState([]);
-  useEffect(() => {
-    const localStrorageTask = JSON.parse(localStorage.getItem("taskList"));
-    if (localStrorageTask) setTaskList(localStrorageTask);
-  }, []);
-
-  const saveTask = (taskObject) => {
-    let tempList = taskList;
-    tempList.push(taskObject);
-    localStorage.setItem("taskList", JSON.stringify(taskList));
-    setTaskList(tempList);
-
-    setModal(false);
-  };
-
-  const deleteFunc = (index) => {
-    let tempList = taskList;
-    tempList.splice(index, 1);
-    localStorage.setItem("taskList", JSON.stringify(tempList));
-    setTaskList(tempList);
-    window.location.reload();
-  };
+  const[showModal, setShowModal] = useState(false);
+  const [taskDetails, setTaskDetails] = useState();
+  const {task} = useTask();
   return (
     <>
       <div className="task-N-List">
         <div className="task-append">
           <h1>Welcome Back!</h1>
-          <button
-            className="btn-com btn-primary-outline"
-            onClick={(modal) => setModal(true)}
-          >
-            {" "}
-            Create Task{" "}
-          </button>
+          <h2>{`You have ${task.length} tasks pending, go kill it! `}</h2>
+         { showModal ? <button className="btn-com btn-primary-outline" onClick={()=> setShowModal(!showModal)}> Discard</button> : <button className="btn-com btn-primary-outline" onClick={()=> setShowModal(!showModal)}>Create Task</button>}
         </div>
 
-        <div className="todoList"></div>
-        {modal && (
-          <CreateTask modal={modal} setModal={setModal} save={saveTask} />
-        )}
+        <div className="todoList"> 
+        { showModal && <CreateTask taskDetails={taskDetails} showModal={showModal} setShowModal={setShowModal} setTaskDetails={setTaskDetails}/>}
+        </div>
       </div>
       <div className="taskCard">
-        {taskList &&
-          taskList.map((task, index) => (
-            <TaskCard task={task} index={index} deleteTask={deleteFunc} />
-          ))}
+        {task.map((items)=>(<TaskCard items={items} setTaskDetails={setTaskDetails} setShowModal={setShowModal} />))}
       </div>
     </>
   );
