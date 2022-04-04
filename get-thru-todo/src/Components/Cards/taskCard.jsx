@@ -2,6 +2,7 @@ import "../Cards/taskCard.css";
 import { colors } from "./cardColor";
 import { useTask } from "../../Context/taskContext";
 const TaskCard = ({ items, setTaskDetails, setShowModal, showModal }) => {
+  const {task, setTask} = useTask()
   const editAction=()=>{
     setTaskDetails(items);
     setShowModal(true);
