@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter} from 'react-router-dom';
 import App from './App';
+import { TaskProvider } from './Context/taskContext';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <TaskProvider>
     <App />
+    </TaskProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
