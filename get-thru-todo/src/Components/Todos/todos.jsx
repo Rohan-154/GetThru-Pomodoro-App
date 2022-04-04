@@ -26,6 +26,13 @@ const TodoList = () => {
     setTaskList(tempList);
     window.location.reload();
   };
+  const updateListArray= (obj,index) =>{
+       let tempList = taskList;
+       tempList[index] = obj;
+       localStorage.setItem('taskList', JSON.stringify(tempList))
+       setTaskList(tempList);
+       window.location.reload();
+  }
   return (
     <>
       <div className="task-N-List">
@@ -35,8 +42,8 @@ const TodoList = () => {
             className="btn-com btn-primary-outline"
             onClick={(modal) => setModal(true)}
           >
-            {" "}
-            Create Task{" "}
+            
+            Create Task
           </button>
         </div>
 
@@ -48,7 +55,7 @@ const TodoList = () => {
       <div className="taskCard">
         {taskList &&
           taskList.map((task, index) => (
-            <TaskCard task={task} index={index} deleteTask={deleteFunc} />
+            <TaskCard task={task} index={index} deleteTask={deleteFunc} updateListArray= {updateListArray} />
           ))}
       </div>
     </>
