@@ -7,7 +7,6 @@ const TodoList = () => {
   const[showModal, setShowModal] = useState(false);
   const [taskDetails, setTaskDetails] = useState();
   const {task} = useTask();
-  
   return (
     <>
       <div className="task-N-List">

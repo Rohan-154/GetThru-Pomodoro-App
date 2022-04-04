@@ -21,6 +21,7 @@ const CreateTask = ({
   };
   const { task, setTask } = useTask();
   const [appendTask, setAppendTask] = useState(taskDetails || initialDetails);
+  console.log("taskDetails", appendTask);
   return (
     <>
       <form className="form-submit" onSubmit={(e)=> e.preventDefault()}>
@@ -52,6 +53,7 @@ const CreateTask = ({
               setAppendTask({...appendTask, description:e.target.value})
             }}
             name="description"
+            required
           ></textarea>{" "}
         </label>
         <lable htmlFor="task">
