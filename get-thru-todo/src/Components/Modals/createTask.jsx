@@ -43,9 +43,7 @@ const CreateTask = ({ modal, setModal, save }) => {
             name="description"
           ></textarea>{" "}
         </label>
-<label>
-  <input type='text'/>
-</label>
+
         <div className="btnDiv">
           <button onClick={(e) => handleAppend(e)}> Save </button>
           <button onClick={(modal) => setModal(false)}> Discard </button>

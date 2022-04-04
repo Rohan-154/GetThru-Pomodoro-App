@@ -18,6 +18,14 @@ const TodoList = () => {
 
     setModal(false);
   };
+
+  const deleteFunc = (index) => {
+    let tempList = taskList;
+    tempList.splice(index, 1);
+    localStorage.setItem("taskList", JSON.stringify(tempList));
+    setTaskList(tempList);
+    window.location.reload();
+  };
   return (
     <>
       <div className="task-N-List">
@@ -38,7 +46,10 @@ const TodoList = () => {
         )}
       </div>
       <div className="taskCard">
-        {  taskList && taskList.map((task,index)=> <TaskCard task = {task} index = {index}/>)}
+        {taskList &&
+          taskList.map((task, index) => (
+            <TaskCard task={task} index={index} deleteTask={deleteFunc} />
+          ))}
       </div>
     </>
   );
